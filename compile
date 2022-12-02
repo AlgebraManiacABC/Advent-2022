@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in {1..25}; do
+    if [[ -d "f$i" ]]; then
+        gcc -o $i f$i/*.c -lm
+    fi
+done

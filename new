@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for i in {1..25}; do
+    if [[ -d "f$i" ]]; then
+        continue
+    fi
+    mkdir "f$i"
+    cp template.c f$i/main.c
+    cp template.h f$i/main.h
+    break
+done
