@@ -3,5 +3,8 @@
 for i in {1..25}; do
     if [[ -d "f$i" ]]; then
         gcc -o $i f$i/*.c -lm
+        if [[ -f "$i" ]]; then
+            ./$i
+        fi
     fi
 done

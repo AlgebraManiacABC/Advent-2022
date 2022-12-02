@@ -7,5 +7,6 @@ for i in {1..25}; do
     mkdir "f$i"
     cp template.c f$i/main.c
     cp template.h f$i/main.h
+    touch "f$i/in.txt"
     break
 done
