@@ -39,10 +39,15 @@ int main(int argc, char *argv[])
         }
         for(int i=0; i<width; i++)
         {
-            workspace[i]->boxes = realloc(workspace[i]->boxes,sizeof(char)*(workspace[i]->height+1));
-            workspace[i]->boxes[workspace[i]->height]=line[(i*4)+1];
             if(line[(i*4)+1] != ' ')
-                workspace[i]->height++;
+            {
+                workspace[i]->boxes = realloc(workspace[i]->boxes,sizeof(char)*++(workspace[i]->height));
+                for(int j=workspace[i]->height-1; j>0; j--)
+                {
+                    workspace[i]->boxes[j] = workspace[i]->boxes[j-1];
+                }
+                workspace[i]->boxes[0]=line[(i*4)+1];
+            }
         }
         free(line);
     }
@@ -58,16 +63,22 @@ int main(int argc, char *argv[])
         int count,from,to;
         //  "Move x from y to z"
         fscanf(in,"%*s %d %*s %d %*s %d",&count,&from,&to);
+        /*
         for(int i=0; i<count; i++)
         {
             move(workspace,from,to);
             //printStacks(workspace,width);
+            //getchar();
             //printf("Count = %d\n",countAll(workspace,width));
             if(allCount != countAll(workspace,width))
             {
                 printf("WRONG!\n");
             }
         }
+        */
+        moveMultiple(workspace,count,from,to);
+        //printStacks(workspace,width);
+        //getchar();
     }
     
     printStacks(workspace,width);
@@ -130,4 +141,14 @@ void move(stack * workspace, int from, int to)
     workspace[to]->boxes = realloc(workspace[to]->boxes,sizeof(char)*++(workspace[to]->height));
     workspace[to]->boxes[workspace[to]->height-1] = workspace[from]->boxes[workspace[from]->height-1];
     workspace[from]->boxes = realloc(workspace[from]->boxes,sizeof(char)*--(workspace[from]->height));
+}
+
+void moveMultiple(stack * workspace, int count, int from, int to)
+{
+    from--;
+    to--;
+    workspace[to]->boxes = realloc(workspace[to]->boxes,sizeof(char)*(workspace[to]->height+count));
+    strncpy(workspace[to]->boxes + workspace[to]->height,workspace[from]->boxes + workspace[from]->height - count,count);
+    workspace[to]->height+=count;
+    workspace[from]->height-=count;
 }

@@ -18,3 +18,4 @@ void printTopRow(stack * workspace, int numStacks);
 int countAll(stack * workspace, int numStacks);
 
 void move(stack * workspace, int from, int to);
+void moveMultiple(stack * workspace, int count, int from, int to);
