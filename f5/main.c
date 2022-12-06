@@ -26,28 +26,24 @@ int main(int argc, char *argv[])
             free(line);
             break;
         }
-        printf("test\n");
         width = (strlen(line)+1)/4;
-        printf("test\n");
         if(!workspace)
         {
             workspace = malloc(sizeof(stack) * width);
-        }
-        printf("test\n");
-        for(int i=0; i<width; i++)
-        {
-            if(!workspace[i])
+            for(int i=0; i<width; i++)
             {
                 workspace[i] = malloc(sizeof(struct stack));
                 workspace[i]->boxes = NULL;
                 workspace[i]->height = 0;
             }
+        }
+        for(int i=0; i<width; i++)
+        {
             workspace[i]->boxes = realloc(workspace[i]->boxes,sizeof(char)*(workspace[i]->height+1));
             workspace[i]->boxes[workspace[i]->height]=line[(i*4)+1];
             if(line[(i*4)+1] != ' ')
                 workspace[i]->height++;
         }
-        printf("test\n");
         free(line);
     }
 
