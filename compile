@@ -1,18 +1,12 @@
 #!/bin/bash
 
-#for i in {1..25}; do
-#    if [[ -d "f$i" ]]; then
-#        gcc -o $i f$i/*.c -lm
-#    fi
-#done
-
 for i in {1..25}; do
-    if [[ -d f$i ]]; then
+    if [[ -d code/$i ]]; then
         let f=i+1
-        if [[ -d f$f ]]; then
+        if [[ -d code/$f ]]; then
             continue
         else
-            gcc -o $i f$i/*.c -Wall -Werror -lm && ./$i
+            gcc -o bin/$i code/$i/*.c -Wall -Werror -lm && ./bin/$i
         fi
     fi
 done

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 for i in {1..25}; do
-    if [[ -d "f$i" ]]; then
+    if [[ -d "code/$i" ]]; then
         continue
     fi
-    mkdir "f$i"
-    cp template.c f$i/main.c
-    cp template.h f$i/main.h
-    touch "f$i/in.txt"
+    mkdir "code/$i"
+    cp template.c code/$i/main.c
+    cp template.h code/$i/main.h
+    touch "code/$i/in.txt"
     break
 done
