@@ -4,3 +4,5 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdbool.h>
+
+int getCommand(FILE *in);
